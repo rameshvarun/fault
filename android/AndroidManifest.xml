@@ -13,9 +13,8 @@
       android:icon="@drawable/love"
       android:label="Fault"
       android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-      <service android:name=".DownloadService" />
       <activity
-        android:name="GameActivity"
+        android:name="FaultActivity"
         android:configChanges="orientation|screenSize"
         android:label="Fault"
         android:launchMode="singleTop"
@@ -25,10 +24,6 @@
           <category android:name="android.intent.category.LAUNCHER" />
           <category android:name="tv.ouya.intent.category.GAME"/>
         </intent-filter>
-      </activity>
-      <activity
-        android:name="DownloadActivity"
-        android:noHistory="true" >
       </activity>
     </application>
 
