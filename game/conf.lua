@@ -3,4 +3,5 @@ function love.conf(t)
   t.window.title = "Fault"
   t.window.resizable = true
   t.window.highdpi = true
+  t.window.fullscreen = true
 end
