@@ -1,16 +1,20 @@
 PlayState = class('PlayState', GameState)
 PlayState:include(Stateful)
+PlayState.static.NEWRECORD_SOUND = love.audio.newSource( 'assets/sound/newrecord.wav', 'static' )
 
 function PlayState:initialize()
   GameState.initialize(self)
   self:reset()
-
   self.cam:lookAt(0, 0)
-
-
   self:calculateScale()
-
   self:gotoState('Initial')
+
+  if love.filesystem.isFile("bestscore") then
+    local contents, size = love.filesystem.read("bestscore")
+    self.bestscore = tonumber(contents)
+  else
+    self.bestscore = nil
+  end
 end
 
 function PlayState:reset()
@@ -18,6 +22,7 @@ function PlayState:reset()
   self.arena = self:addEntity(PlayArea())
   self.player = self:addEntity(Player())
   self.score = 0.0
+  self.newrecord = false
 end
 
 function PlayState:calculateScale()
@@ -32,6 +37,12 @@ function PlayState:calculateScale()
 
   self.time_font = love.graphics.newFont("assets/roboto.ttf", 20*self.scale)
   self.time_font:setFilter('nearest', 'nearest', 0)
+
+  self.best_font = love.graphics.newFont("assets/roboto.ttf", 20*self.scale)
+  self.best_font:setFilter('nearest', 'nearest', 0)
+
+  self.new_record_font = love.graphics.newFont("assets/roboto.ttf", 20*self.scale)
+  self.new_record_font:setFilter('nearest', 'nearest', 0)
 
   self.instruction_font = love.graphics.newFont("assets/roboto.ttf", 15*self.scale)
   self.instruction_font:setFilter('nearest', 'nearest', 0)
@@ -56,6 +67,15 @@ end
 function PlayState:update(dt)
   GameState.update(self, dt)
   self.score = self.score + dt
+
+  if self.newrecord == false and (self.bestscore == nil or self.score > self.bestscore) then
+    self.newrecord = true
+    self.newrecord_visible = true
+
+    if self.bestscore ~= nil then
+      PlayState.NEWRECORD_SOUND:play()
+    end
+  end
 end
 
 function PlayState:overlay()
@@ -71,6 +91,15 @@ function PlayState:overlay()
   Color.BLACK:use()
   love.graphics.setFont(self.time_font)
   love.graphics.printf(string.format("%.1f", self.score), love.graphics.getWidth()/2 - trap_width/2, self.scale*3.5, trap_width, "center")
+
+  if self.bestscore ~= nil and self.newrecord and self.newrecord_visible then
+    Color.WHITE:use()
+    love.graphics.setFont(self.new_record_font)
+    love.graphics.printf("NEW RECORD",
+      love.graphics.getWidth()/2 - love.graphics.getWidth()/2,
+      (love.graphics.getHeight()/2 - self.scale*PlayArea.SIZE/2)/2,
+      love.graphics.getWidth(), "center")
+  end
 end
 
 require_dir "src/phases"

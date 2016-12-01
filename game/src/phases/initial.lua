@@ -15,6 +15,15 @@ function Initial:overlay()
       love.graphics.getHeight()/2 + self.scale*65,
       self.scale*10*(1 + 0.2*(math.sin(self.time))^2),
       32)
+
+    if self.bestscore ~= nil then
+      Color.WHITE:use()
+      love.graphics.setFont(self.best_font)
+      love.graphics.printf(string.format("BEST: %.1f", self.bestscore),
+        love.graphics.getWidth()/2 - love.graphics.getWidth()/2,
+        (love.graphics.getHeight()/2 - self.scale*PlayArea.SIZE/2)/2,
+        love.graphics.getWidth(), "center")
+    end
 end
 
 function Initial:touchpressed(id, x, y, dx, dy, pressure)
