@@ -1,9 +1,11 @@
 require 'utils' -- Load in utilities.
 
+inspect = require 'external.inspect'
 class = require 'external.middleclass' -- Middleclass, for following OOP patterns.
+Stateful = require 'external.stateful' -- Stateful.lua, for state-based classes.
+
 vector = require 'external.vector' -- HUMP.vector, for the vector primitive.
-stateful = require 'external.stateful' -- Stateful.lua, for state-based classes.
-hc = require 'external.hc' -- HardonCollider, for collision detection.
+collision = require 'external.hc.shapes' -- HardonCollider, for collision detection.
 lume = require 'external.lume' -- Game-related helpers
 
 Timer = require 'external.timer' -- HUMP.timer
