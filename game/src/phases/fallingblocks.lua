@@ -13,8 +13,4 @@ end
 
 function FallingBlocks:enteredState()
   -- self:addEntity(Block(vector(0, 0), 0, vector(100, 10), vector(0, 0), Color.RED))
-
-  self:addEntity(Ship('top',10))
-  self:addEntity(Ship('right',10))
-  self:addEntity(Ship('left',10))
 end

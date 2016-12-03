@@ -20,6 +20,7 @@ function Stars:start()
 end
 
 function Stars:draw()
+  love.graphics.setLineWidth(1)
   for i, layer in ipairs(self.starlayers) do
     love.graphics.setColor(255, 255, 255, 255*Stars.LAYER_SPEEDS[i])
     for j, point in ipairs(layer) do

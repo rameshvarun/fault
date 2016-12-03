@@ -9,13 +9,11 @@ end
 
 function Dead:touchpressed(id, x, y, dx, dy, pressure)
   PlayState.touchpressed(self, id, x, y, dx, dy, pressure)
-  self:reset()
-  self:gotoState('FallingBlocks')
+  self:startGame()
 end
 function Dead:mousepressed(x, y, button, istouch)
   PlayState.touchpressed(self, id, x, y, dx, dy, pressure )
-  self:reset()
-  self:gotoState('FallingBlocks')
+  self:startGame()
 end
 function Dead:mousemoved(x, y, dx, dy, istouch)
   GameState.touchmoved(self, id, x, y, dx, dy, pressure)

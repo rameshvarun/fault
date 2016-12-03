@@ -5,6 +5,8 @@ local PHASE_DURATION = 10
 function Ships:enteredState()
   self:addEntity(Stars())
 
+  self:flashWhite(1.0)
+
   self:addEntity(Ship('top', PHASE_DURATION))
 
   self.timer:after(2, function()

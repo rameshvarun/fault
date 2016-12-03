@@ -28,11 +28,11 @@ end
 
 function Initial:touchpressed(id, x, y, dx, dy, pressure)
   PlayState.touchpressed(self, id, x, y, dx, dy, pressure)
-  self:gotoState('Ships')
+  self:startGame()
 end
 function Initial:mousepressed(x, y, button, istouch)
   PlayState.touchpressed(self, id, x, y, dx, dy, pressure )
-  self:gotoState('Ships')
+  self:startGame()
 end
 function Initial:mousemoved(x, y, dx, dy, istouch)
   GameState.touchmoved(self, id, x, y, dx, dy, pressure)

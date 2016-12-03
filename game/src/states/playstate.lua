@@ -15,6 +15,12 @@ function PlayState:initialize()
   else
     self.bestscore = nil
   end
+
+  self.white_fader = { time = 1.0, duration = 1.0 }
+end
+
+function PlayState:flashWhite(duration)
+    self.white_fader = { time = 0, duration = duration }
 end
 
 function PlayState:reset()
@@ -65,6 +71,11 @@ function PlayState:mousemoved(x, y, dx, dy, istouch )
   self.player:move(dx / self.scale, dy / self.scale)
 end
 
+function PlayState:startGame()
+  self:reset()
+  self:gotoState('Ships')
+end
+
 function PlayState:update(dt)
   GameState.update(self, dt)
   self.score = self.score + dt
@@ -77,6 +88,8 @@ function PlayState:update(dt)
       PlayState.NEWRECORD_SOUND:play()
     end
   end
+
+  self.white_fader.time = self.white_fader.time + dt
 end
 
 function PlayState:overlay()
@@ -100,6 +113,12 @@ function PlayState:overlay()
       love.graphics.getWidth()/2 - love.graphics.getWidth()/2,
       (love.graphics.getHeight()/2 - self.scale*PlayArea.SIZE/2)/2,
       love.graphics.getWidth(), "center")
+  end
+
+  if self.white_fader.time < self.white_fader.duration then
+    love.graphics.setColor(255, 255, 255,
+      255 * (1 - (self.white_fader.time / self.white_fader.duration)))
+    love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
   end
 end
 
