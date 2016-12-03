@@ -18,6 +18,7 @@ function PlayState:initialize()
 end
 
 function PlayState:reset()
+  self.timer:clear()
   self.entities = {}
   self.arena = self:addEntity(PlayArea())
   self.player = self:addEntity(Player())

@@ -18,6 +18,7 @@ require "src.gamestate" -- Load in game states.
 require "src.entity" -- Load in entities.
 
 function love.load(arg)
+  if arg[2] == 'debug' then DEBUG = true end
   GameState.switchTo(PlayState()) -- Switch to controller select menu.
 end
 
@@ -28,6 +29,8 @@ function love.update(dt)
   if GameState.currentState ~= nil then
     GameState.currentState:update(dt)
   end
+
+  if DEBUG then require("external.lurker").update() end
 end
 
 function love.draw()

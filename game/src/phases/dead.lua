@@ -24,6 +24,9 @@ function Dead:touchmoved(id, x, y, dx, dy, pressure)
   GameState.touchmoved(self, id, x, y, dx, dy, pressure)
 end
 function Dead:update(dt)
-  GameState.update(self, dt)
+  -- Update total time.
+  self.time = self.time + dt
+
   self.newrecord_visible = (self.time % 1) < 0.5
+  self.player:update(dt)
 end

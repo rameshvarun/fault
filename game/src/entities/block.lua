@@ -6,8 +6,11 @@ function Block:initialize(center, angle, size, velocity, color)
     self.size = size
     self.velocity = velocity
     self.color = color
+
     self.collision_shape = collision.newPolygonShape(-size.x/2, -size.y/2,
       -size.x/2, size.y/2, size.x/2, size.y/2, size.x/2, -size.y/2)
+
+    self:updateCollisionShape()
 end
 
 function Block:draw()
@@ -21,6 +24,10 @@ end
 
 function Block:update(dt)
   self.pos = self.pos + self.velocity*dt
+  self:updateCollisionShape()
+end
+
+function Block:updateCollisionShape()
   self.collision_shape:moveTo(self.pos:unpack())
   self.collision_shape:setRotation(self.angle)
 end
