@@ -1,6 +1,7 @@
 PlayState = class('PlayState', GameState)
 PlayState:include(Stateful)
 PlayState.static.NEWRECORD_SOUND = love.audio.newSource( 'assets/sound/newrecord.wav', 'static' )
+PlayState.static.NEWRECORD_SOUND:setVolume(0.4)
 
 function PlayState:initialize()
   GameState.initialize(self)
@@ -73,7 +74,7 @@ end
 
 function PlayState:startGame()
   self:reset()
-  self:gotoState('Ships')
+  self:gotoState('FallingBlocks')
 end
 
 function PlayState:update(dt)

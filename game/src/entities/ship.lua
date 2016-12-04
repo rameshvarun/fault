@@ -28,7 +28,7 @@ function Ship:initialize(side, duration)
   Entity.initialize(self, 'ship', 0, vector(0, 0))
 
   self.side = side
-  self.vpos = vector(love.math.random(Ship.LEFT, Ship.RIGHT), PlayArea.SIZE/2 + Ship.DISTANCE)
+  self.vpos = vector(lume.random(Ship.LEFT, Ship.RIGHT), PlayArea.SIZE/2 + Ship.DISTANCE)
   self.duration = duration
 
   if side == "top" then

@@ -23,6 +23,8 @@ function love.load(arg)
 end
 
 function love.update(dt)
+  if arg[2] == 'debug' and love.keyboard.isDown('space') then dt = dt*0.5 end
+
   Timer.update(dt) -- Update global timer events.
 
   -- If there is a current GameState, update it.
