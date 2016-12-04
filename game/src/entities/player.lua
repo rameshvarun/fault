@@ -6,7 +6,7 @@ Player.static.HEIGHT = 15
 Player.static.DIP = 5
 Player.static.NUM_TRAILS = 5
 Player.static.DEATH_SOUND = love.audio.newSource( 'assets/sound/die.wav', 'static' )
-Player.static.DEATH_SOUND:setVolume(0.4)
+Player.static.DEATH_SOUND:setVolume(0.2)
 
 Player.static.SHAPE = {
   -Player.WIDTH / 2,  Player.HEIGHT/2,

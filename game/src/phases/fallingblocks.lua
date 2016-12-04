@@ -90,10 +90,22 @@ function FallingBlocks:enteredState()
   self:flashWhite(1.0)
 
   self.blocks = EasyPeasy()
+  self.block_entities = {}
   for _, pattern in ipairs(lume.shuffle(PATTERNS)) do
     for _, block in ipairs(pattern()) do
       table.insert(self.blocks, block)
     end
+  end
+
+  self.timer:after(11.75, function()
+    self:destroyBlocks()
+    self:gotoState('Ships')
+  end)
+end
+
+function FallingBlocks:destroyBlocks()
+  for _, entity in ipairs(self.block_entities) do
+    entity:destroy()
   end
 end
 
@@ -118,5 +130,7 @@ function FallingBlocks:update(dt)
     local block = Block(pos, 0, size, velocity, Color.RED)
     self:addEntity(block)
     block:update(missed_time)
+
+    table.insert(self.block_entities, block)
   end
 end

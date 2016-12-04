@@ -1,6 +1,7 @@
 local Dead = PlayState:addState('Dead')
 
 function Dead:enteredState()
+  PlayState.MUSIC:stop()
   if self.newrecord then
     love.filesystem.write("bestscore", tostring(self.score))
     self.bestscore = self.score
