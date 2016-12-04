@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 svgexport media/icon.svg android/res/drawable-mdpi/love.png 48:48
 svgexport media/icon.svg android/res/drawable-hdpi/love.png 72:72
 
