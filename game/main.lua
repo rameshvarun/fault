@@ -17,6 +17,10 @@ Color = require 'src.color' -- Load in the color library.
 require "src.gamestate" -- Load in game states.
 require "src.entity" -- Load in entities.
 
+if love.system.getOS() == "Android" then
+   love.window.setFullscreen(true)
+end
+
 function love.load(arg)
   if arg[2] == 'debug' then DEBUG = true end
   GameState.switchTo(PlayState()) -- Switch to controller select menu.
