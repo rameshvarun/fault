@@ -1,6 +1,8 @@
 local Endless = PlayState:addState('Endless')
 
 function Endless:enteredState()
+  self:flashWhite(1.0)
+
   self.epilepsy = self:addEntity(Epilepsy())
 end
 

@@ -60,7 +60,7 @@ function Player:update(dt)
       lume.lerp(self.last_pos.y, self.pos.y, i / INTERVALS)
     )
     self.collision_shape:moveTo((pos + self.collision_offset):unpack())
-    self.collision_shape:setRotation(angle)
+    self.collision_shape:setRotation(angle, self.pos:unpack())
 
     for _, obstacle in ipairs(self.gameState:getEntitiesByTag('obstacle')) do
       local collision, dx, dy = obstacle:collidesWith(self.collision_shape)

@@ -13,13 +13,14 @@ end
 
 function Hallway:draw()
   love.graphics.setColor(255, 255, 255, 255*0.5)
-  love.graphics.setLineWidth(0.005)
   for _, t in ipairs(self.squares) do
     local pos = vector(
       0, - (1 - 2*(t / Hallway.SQUARE_PERIOD))*80 + 50
     )
     local s = lume.lerp(0, 900, (t / Hallway.SQUARE_PERIOD))
     local r = lume.lerp(0.5, 0, (t / Hallway.SQUARE_PERIOD))
+
+    love.graphics.setLineWidth(2 / s)
 
     love.graphics.push()
     love.graphics.translate(pos:unpack())

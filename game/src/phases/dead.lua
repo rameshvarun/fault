@@ -6,6 +6,7 @@ function Dead:enteredState()
     love.filesystem.write("bestscore", tostring(self.score))
     self.bestscore = self.score
   end
+  for _, ui in ipairs(self.ui) do ui.hidden = false end
 end
 
 function Dead:touchpressed(id, x, y, dx, dy, pressure)
@@ -28,4 +29,7 @@ function Dead:update(dt)
 
   self.newrecord_visible = (self.time % 1) < 0.5
   self.player:update(dt)
+
+  self.white_fader.time = self.white_fader.time + dt
+  for _, ui in ipairs(self.ui) do ui:update(dt) end
 end

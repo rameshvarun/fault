@@ -4,8 +4,13 @@ PlayState.static.NEWRECORD_SOUND = love.audio.newSource( 'assets/sound/newrecord
 PlayState.static.NEWRECORD_SOUND:setVolume(0.2)
 
 PlayState.static.MUSIC = love.audio.newSource('assets/sound/music.mp3', 'stream')
+PlayState.MUSIC:setVolume(0.3)
 
 function PlayState:initialize()
+  self.ui = {}
+  -- self.practice_mode_button = MenuButton(vector(0, 0))
+  table.insert(self.ui, self.practice_mode_button)
+
   GameState.initialize(self)
   self:reset()
   self.cam:lookAt(0, 0)
@@ -20,6 +25,8 @@ function PlayState:initialize()
   end
 
   self.white_fader = { time = 1.0, duration = 1.0 }
+
+
 end
 
 function PlayState:flashWhite(duration)
@@ -59,6 +66,9 @@ function PlayState:calculateScale()
 
   self.endless_font = love.graphics.newFont("assets/roboto.ttf", 20*self.scale)
   self.endless_font:setFilter('nearest', 'nearest', 0)
+
+  self.practice_mode_button.pos.x = love.graphics.getWidth()
+  self.practice_mode_button.pos.y = love.graphics.getHeight()/4
 end
 
 function PlayState:resize(w, h) self:calculateScale() end
@@ -78,6 +88,8 @@ function PlayState:startGame()
   self:reset()
   self:gotoState('FallingBlocks')
   PlayState.MUSIC:play()
+
+  for _, ui in ipairs(self.ui) do ui.hidden = true end
 end
 
 function PlayState:update(dt)
@@ -92,6 +104,8 @@ function PlayState:update(dt)
       PlayState.NEWRECORD_SOUND:play()
     end
   end
+
+  for _, ui in ipairs(self.ui) do ui:update(dt) end
 
   self.white_fader.time = self.white_fader.time + dt
 end
@@ -117,6 +131,10 @@ function PlayState:overlay()
       love.graphics.getWidth()/2 - love.graphics.getWidth()/2,
       (love.graphics.getHeight()/2 - self.scale*PlayArea.SIZE/2)/2,
       love.graphics.getWidth(), "center")
+  end
+
+  for _, ui in ipairs(self.ui) do
+    ui:overlay(self.scale)
   end
 
   if self.white_fader.time < self.white_fader.duration then
