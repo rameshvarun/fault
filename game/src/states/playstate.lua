@@ -8,8 +8,8 @@ PlayState.MUSIC:setVolume(0.3)
 
 function PlayState:initialize()
   self.ui = {}
-  -- self.practice_mode_button = MenuButton(vector(0, 0))
-  table.insert(self.ui, self.practice_mode_button)
+  self.practice_mode_button = MenuButton(vector(0, 0))
+  -- table.insert(self.ui, self.practice_mode_button)
 
   GameState.initialize(self)
   self:reset()

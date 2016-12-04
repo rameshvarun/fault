@@ -1,5 +1,14 @@
 local Initial = PlayState:addState('Initial')
 
+function DrawBestScore(self)
+  Color.WHITE:use()
+  love.graphics.setFont(self.best_font)
+  love.graphics.printf(string.format("BEST: %.1f", self.bestscore),
+    love.graphics.getWidth()/2 - love.graphics.getWidth()/2,
+    (love.graphics.getHeight()/2 - self.scale*PlayArea.SIZE/2)/2,
+    love.graphics.getWidth(), "center")
+end
+
 function Initial:overlay()
     PlayState.overlay(self)
 
@@ -17,12 +26,7 @@ function Initial:overlay()
       32)
 
     if self.bestscore ~= nil then
-      Color.WHITE:use()
-      love.graphics.setFont(self.best_font)
-      love.graphics.printf(string.format("BEST: %.1f", self.bestscore),
-        love.graphics.getWidth()/2 - love.graphics.getWidth()/2,
-        (love.graphics.getHeight()/2 - self.scale*PlayArea.SIZE/2)/2,
-        love.graphics.getWidth(), "center")
+      DrawBestScore(self)
     end
 end
 

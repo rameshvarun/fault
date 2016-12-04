@@ -4,6 +4,24 @@ function Endless:enteredState()
   self:flashWhite(1.0)
 
   self.epilepsy = self:addEntity(Epilepsy())
+  self.speed = 3*60
+  self.scaling = 2
+  self.block_timer = 0
+end
+
+function Endless:update(dt)
+  PlayState.update(self, dt)
+
+  self.scaling = self.scaling + dt * 0.025
+  self.block_timer = self.block_timer + dt*self.scaling
+  if self.block_timer > 0.5 then
+    self.block_timer = 0
+    local width = PlayArea.SIZE * lume.random(0.2, 0.8)
+    local center = lume.random(-0.4, 0.4) * PlayArea.SIZE
+    local block = Block(vector(center, -PlayArea.SIZE - 200), 0, vector(width, 10),
+      vector(0, self.scaling*self.speed), Color.RED)
+      self:addEntity(block)
+  end
 end
 
 function Endless:overlay()

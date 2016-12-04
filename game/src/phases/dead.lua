@@ -33,3 +33,10 @@ function Dead:update(dt)
   self.white_fader.time = self.white_fader.time + dt
   for _, ui in ipairs(self.ui) do ui:update(dt) end
 end
+
+function Dead:overlay()
+  PlayState.overlay(self)
+  if not self.newrecord then
+    DrawBestScore(self)
+  end
+end

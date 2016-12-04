@@ -1,6 +1,6 @@
 Epilepsy = class('Epilepsy', Entity)
 
-Epilepsy.static.COLORS = {Color(0, 255, 0), Color(0, 0, 255), Color(255, 0, 255),
+Epilepsy.static.COLORS = {Color(0, 255, 255), Color(255, 0, 255),
       Color(0, 255, 255), Color(255, 255, 0)}
 
 function Epilepsy:initialize()
