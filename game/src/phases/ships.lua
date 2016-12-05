@@ -7,14 +7,15 @@ function Ships:enteredState()
 
   self:flashWhite(1.0)
 
-  self:addEntity(Ship('top', PHASE_DURATION))
+  self:addEntity(Ship('top', PHASE_DURATION, lume.random(-1, 1)))
 
+  local pos = lume.random(-1, 1)
   self.timer:after(2, function()
-    self:addEntity(Ship('right', PHASE_DURATION - 2))
+    self:addEntity(Ship('right', PHASE_DURATION - 2, pos))
   end)
 
   self.timer:after(4, function()
-    self:addEntity(Ship('left', PHASE_DURATION - 4))
+    self:addEntity(Ship('left', PHASE_DURATION - 4, pos))
   end)
 
   self.timer:after(PHASE_DURATION, function()

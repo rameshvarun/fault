@@ -24,11 +24,11 @@ Ship.static.SPEED = 70
 Ship.static.FIRE_FREQ = 0.4
 Ship.static.BULLET_SPEED = 2.5*60
 
-function Ship:initialize(side, duration)
+function Ship:initialize(side, duration, pos)
   Entity.initialize(self, 'ship', 0, vector(0, 0))
 
   self.side = side
-  self.vpos = vector(lume.random(Ship.LEFT, Ship.RIGHT), PlayArea.SIZE/2 + Ship.DISTANCE)
+  self.vpos = vector(pos * Ship.RIGHT, PlayArea.SIZE/2 + Ship.DISTANCE)
   self.duration = duration
 
   if side == "top" then
