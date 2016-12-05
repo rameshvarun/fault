@@ -12,6 +12,15 @@ local TUNNEL_SPEED = 150
 local center = {0.5}
 local width = {1, 0.8, 0.5}
 
+local function det(x1,y1, x2,y2)
+	return x1*y2 - y1*x2
+end
+
+-- returns true if three vertices lie on a line
+local function areCollinear(px, py, qx, qy, rx, ry, eps)
+	return math.abs(det(qx-px, qy-py,  rx-px,ry-py)) <= (eps or 1e-32)
+end
+
 function TunnelEntity:initialize()
     Entity.initialize(self, 'obstacle', -1, vector(0, -PlayArea.SIZE/2))
 
@@ -69,12 +78,16 @@ function TunnelEntity:initialize()
 
     self.collision_shapes = {}
     for _, triangle in ipairs(self.left_triangles) do
-      table.insert(self.collision_shapes,
-        collision.newPolygonShape(unpack(triangle)))
+      if not areCollinear(unpack(triangle)) then
+        table.insert(self.collision_shapes,
+          collision.newPolygonShape(unpack(triangle)))
+      end
     end
     for _, triangle in ipairs(self.right_triangles) do
-      table.insert(self.collision_shapes,
-        collision.newPolygonShape(unpack(triangle)))
+      if not areCollinear(unpack(triangle)) then
+        table.insert(self.collision_shapes,
+          collision.newPolygonShape(unpack(triangle)))
+      end
     end
 
     for _, shape in ipairs(self.collision_shapes) do

@@ -11,6 +11,8 @@ function Block:initialize(center, angle, size, velocity, color)
       -size.x/2, size.y/2, size.x/2, size.y/2, size.x/2, -size.y/2)
 
     self:updateCollisionShape()
+
+    self.life = 0
 end
 
 function Block:draw()
@@ -25,6 +27,11 @@ end
 function Block:update(dt)
   self.pos = self.pos + self.velocity*dt
   self:updateCollisionShape()
+
+  self.life = self.life + dt
+  if self.life > 10 then
+    self:destroy()
+  end
 end
 
 function Block:updateCollisionShape()

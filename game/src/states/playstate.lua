@@ -37,6 +37,7 @@ function PlayState:reset()
   self.timer:clear()
   self.entities = {}
   self.arena = self:addEntity(PlayArea())
+  self.arenashadow = self:addEntity(PlayAreaShadow())
   self.player = self:addEntity(Player())
   self.score = 0.0
   self.newrecord = false
