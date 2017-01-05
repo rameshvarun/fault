@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="net.varunramesh.fault"
+      android:versionCode="23"
+      android:versionName="0.1.0"
+      android:installLocation="auto" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+      android:allowBackup="true"
+      android:icon="@drawable/love"
+      android:label="Fault"
+      android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+
+        <meta-data android:name="com.google.android.gms.games.APP_ID"
+            android:value="@string/app_id" />
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+
+      <activity
+        android:name="FaultActivity"
+        android:configChanges="orientation|screenSize"
+        android:label="Fault"
+        android:launchMode="singleTop"
+        android:screenOrientation="portrait" >
+        <intent-filter>
+          <action android:name="android.intent.action.MAIN" />
+          <category android:name="android.intent.category.LAUNCHER" />
+          <category android:name="tv.ouya.intent.category.GAME"/>
+        </intent-filter>
+      </activity>
+    </application>
+
+    <!-- Android 2.3.3 -->
+    <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="18" />
+
+    <!-- OpenGL ES 2.0 -->
+    <uses-feature android:glEsVersion="0x00020000" />
+</manifest>
