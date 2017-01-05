@@ -1,28 +1,18 @@
 local Dead = PlayState:addState('Dead')
 
 function Dead:enteredState()
+  love.system.unlockAchievement(IDS.ACH_PLAY_A_GAME)
+  love.system.submitScore(IDS.LEAD_SURVIVAL_TIME, self.score * 100)
+
   PlayState.MUSIC:stop()
   if self.newrecord then
     love.filesystem.write("bestscore", tostring(self.score))
     self.bestscore = self.score
   end
-  for _, ui in ipairs(self.ui) do ui.hidden = false end
+
+  self:showButtons()
 end
 
-function Dead:touchpressed(id, x, y, dx, dy, pressure)
-  PlayState.touchpressed(self, id, x, y, dx, dy, pressure)
-  self:startGame()
-end
-function Dead:mousepressed(x, y, button, istouch)
-  PlayState.touchpressed(self, id, x, y, dx, dy, pressure )
-  self:startGame()
-end
-function Dead:mousemoved(x, y, dx, dy, istouch)
-  GameState.touchmoved(self, id, x, y, dx, dy, pressure)
-end
-function Dead:touchmoved(id, x, y, dx, dy, pressure)
-  GameState.touchmoved(self, id, x, y, dx, dy, pressure)
-end
 function Dead:update(dt)
   -- Update total time.
   self.time = self.time + dt
@@ -31,7 +21,7 @@ function Dead:update(dt)
   self.player:update(dt)
 
   self.white_fader.time = self.white_fader.time + dt
-  for _, ui in ipairs(self.ui) do ui:update(dt) end
+  self:updateButtons(dt)
 end
 
 function Dead:overlay()
@@ -39,4 +29,11 @@ function Dead:overlay()
   if not self.newrecord then
     DrawBestScore(self)
   end
+end
+
+function Dead:mousepressed(x, y, button, istouch)
+  PlayState.mousepressed(self, x, y, button, istouch)
+  if not istouch and not love.mouse.isDown(1) then return end
+  if self.ignore_touch then return end
+  self:startGame()
 end

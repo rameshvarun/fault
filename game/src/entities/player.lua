@@ -67,6 +67,7 @@ function Player:update(dt)
       if collision then
         self.pos = pos - vector(dx, dy)
         Player.DEATH_SOUND:play()
+
         self.gameState:gotoState('Dead')
         self:gotoState('Dead')
         break

@@ -6,10 +6,31 @@ PlayState.static.NEWRECORD_SOUND:setVolume(0.2)
 PlayState.static.MUSIC = love.audio.newSource('assets/sound/music.mp3', 'stream')
 PlayState.MUSIC:setVolume(0.3)
 
+PlayState.static.VMARGIN = 20
+
 function PlayState:initialize()
-  self.ui = {}
-  self.practice_mode_button = MenuButton(vector(0, 0))
-  -- table.insert(self.ui, self.practice_mode_button)
+  self.buttons = {}
+
+  self.signin_button = MenuButton(MenuButton.CONTROLLER, 1.5, function()
+    love.system.googlePlayConnect()
+  end, false)
+
+  self.leaderboard_button = MenuButton(MenuButton.LEADERBOARDS, 1.5, function()
+    love.system.showLeaderboard(IDS.LEAD_SURVIVAL_TIME)
+  end, false)
+
+  self.practice_mode_button = MenuButton(MenuButton.MORE, 1.5, function()
+    GameState.switchTo(ModeMenu())
+  end, false)
+
+  self.achievements_button = MenuButton(MenuButton.ACHIEVEMENTS, 1.5, function()
+    love.system.showAchievements()
+  end, false)
+
+  table.insert(self.buttons, self.signin_button)
+  -- table.insert(self.buttons, self.practice_mode_button)
+  table.insert(self.buttons, self.leaderboard_button)
+  table.insert(self.buttons, self.achievements_button)
 
   GameState.initialize(self)
   self:reset()
@@ -26,7 +47,11 @@ function PlayState:initialize()
 
   self.white_fader = { time = 1.0, duration = 1.0 }
 
+  -- Whether or not the current touch should be ignored.
+  self.ignore_touch = false
 
+
+  self.touch_first_frame = true
 end
 
 function PlayState:flashWhite(duration)
@@ -68,20 +93,50 @@ function PlayState:calculateScale()
   self.endless_font = love.graphics.newFont("assets/roboto.ttf", 20*self.scale)
   self.endless_font:setFilter('nearest', 'nearest', 0)
 
-  self.practice_mode_button.pos.x = love.graphics.getWidth()
-  self.practice_mode_button.pos.y = love.graphics.getHeight()/4
+  for i, button in ipairs(self.buttons) do
+    button.pos.x = love.graphics.getWidth()
+    button.pos.y = 40 * self.scale * i
+  end
 end
 
 function PlayState:resize(w, h) self:calculateScale() end
 
-function PlayState:touchmoved(id, x, y, dx, dy, pressure)
-  GameState.touchmoved(self, id, x, y, dx, dy, pressure)
-  self.player:move(dx / self.scale, dy / self.scale)
+function PlayState:mousepressed(x, y, button, istouch)
+  GameState.mousepressed(self, x, y, button, istouch)
+  if not istouch or not love.mouse.isDown(1) then return end
+
+  for _, button in ipairs(self.buttons) do
+    if button:containsPoint(x, y) then
+      self.ignore_touch = true
+      button.action()
+      break
+    end
+  end
+
+  if istouch and y < PlayState.VMARGIN then
+    self.ignore_touch = true
+  end
+  if istouch and y > love.graphics.getHeight() - PlayState.VMARGIN then
+    self.ignore_touch = true
+  end
+end
+
+function PlayState:mousereleased(x, y, button, isTouch)
+  self.ignore_touch = false
+  self.touch_first_frame = true
 end
 
 function PlayState:mousemoved(x, y, dx, dy, istouch )
-  GameState.touchmoved(self, id, x, y, dx, dy, pressure)
-  if istouch or not love.mouse.isDown(1) then return end
+  GameState.mousemoved(self, x, y, dx, dy, istouch)
+  if not istouch and not love.mouse.isDown(1) then return end
+
+  if self.ignore_touch then return end
+
+  if self.touch_first_frame then
+    self.touch_first_frame = false
+    return
+  end
+
   self.player:move(dx / self.scale, dy / self.scale)
 end
 
@@ -89,9 +144,32 @@ function PlayState:startGame()
   self:reset()
   self:gotoState('FallingBlocks')
   PlayState.MUSIC:play()
-
-  for _, ui in ipairs(self.ui) do ui.hidden = true end
+  self:hideButtons()
 end
+
+function PlayState:hideButtons()
+  for _, button in ipairs(self.buttons) do
+    button.hidden = true
+  end
+end
+
+function PlayState:updateButtons(dt)
+  for _, button in ipairs(self.buttons) do
+    button:update(dt)
+  end
+
+  local connected = love.system.isGooglePlayConnected()
+  self.signin_button.enabled = not connected
+  self.leaderboard_button.enabled = connected
+  self.achievements_button.enabled = connected
+end
+
+function PlayState:showButtons()
+  for _, button in ipairs(self.buttons) do
+    button.hidden = false
+  end
+end
+
 
 function PlayState:update(dt)
   GameState.update(self, dt)
@@ -103,11 +181,11 @@ function PlayState:update(dt)
 
     if self.bestscore ~= nil then
       PlayState.NEWRECORD_SOUND:play()
+      love.system.unlockAchievement(IDS.ACH_BEAT_YOUR_PERSONAL_BEST)
     end
   end
 
-  for _, ui in ipairs(self.ui) do ui:update(dt) end
-
+  self:updateButtons(dt)
   self.white_fader.time = self.white_fader.time + dt
 end
 
@@ -134,8 +212,8 @@ function PlayState:overlay()
       love.graphics.getWidth(), "center")
   end
 
-  for _, ui in ipairs(self.ui) do
-    ui:overlay(self.scale)
+  for _, button in ipairs(self.buttons) do
+    button:overlay(self.scale)
   end
 
   if self.white_fader.time < self.white_fader.duration then

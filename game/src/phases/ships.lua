@@ -3,6 +3,7 @@ local Ships = PlayState:addState('Ships')
 local PHASE_DURATION = 23.5 - 11.75
 
 function Ships:enteredState()
+  love.system.unlockAchievement(IDS.ACH_REACH_THE_SHIPS)
   local stars = self:addEntity(Stars())
 
   self:flashWhite(1.0)

@@ -1,5 +1,7 @@
 require 'utils' -- Load in utilities.
 
+IDS = require 'src.ids'
+
 inspect = require 'external.inspect'
 class = require 'external.middleclass' -- Middleclass, for following OOP patterns.
 Stateful = require 'external.stateful' -- Stateful.lua, for state-based classes.

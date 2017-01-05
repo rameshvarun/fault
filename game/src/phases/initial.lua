@@ -30,20 +30,15 @@ function Initial:overlay()
     end
 end
 
-function Initial:touchpressed(id, x, y, dx, dy, pressure)
-  PlayState.touchpressed(self, id, x, y, dx, dy, pressure)
-  self:startGame()
-end
-function Initial:mousepressed(x, y, button, istouch)
-  PlayState.touchpressed(self, id, x, y, dx, dy, pressure )
-  self:startGame()
-end
-function Initial:mousemoved(x, y, dx, dy, istouch)
-  GameState.touchmoved(self, id, x, y, dx, dy, pressure)
-end
-function Initial:touchmoved(id, x, y, dx, dy, pressure)
-  GameState.touchmoved(self, id, x, y, dx, dy, pressure)
-end
 function Initial:update(dt)
   GameState.update(self, dt)
+  self:updateButtons(dt)
+end
+
+function Initial:mousepressed(x, y, button, istouch)
+  PlayState.mousepressed(self, x, y, button, istouch)
+  if not istouch and not love.mouse.isDown(1) then return end
+
+  if self.ignore_touch then return end
+  self:startGame()
 end

@@ -1,6 +1,8 @@
 local Endless = PlayState:addState('Endless')
 
 function Endless:enteredState()
+  love.system.unlockAchievement(IDS.ACH_REACH_ENDLESS_MODE)
+
   self:flashWhite(1.0)
 
   self.epilepsy = self:addEntity(Epilepsy())
