@@ -26,7 +26,11 @@ function love.load(arg)
   GameState.switchTo(PlayState()) -- Switch to controller select menu.
 end
 
+MAX_DELTA_TIME = 1 / 30
+
 function love.update(dt)
+  if dt > MAX_DELTA_TIME then dt = MAX_DELTA_TIME end
+  
   if arg[2] == 'debug' and love.keyboard.isDown('space') then dt = dt*0.5 end
 
   Timer.update(dt) -- Update global timer events.
