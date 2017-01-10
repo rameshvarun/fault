@@ -1,8 +1,10 @@
 local Dead = PlayState:addState('Dead')
 
 function Dead:enteredState()
-  love.system.unlockAchievement(IDS.ACH_PLAY_A_GAME)
-  love.system.submitScore(IDS.LEAD_SURVIVAL_TIME, self.score * 100)
+  if ANDROID then
+    love.system.unlockAchievement(IDS.ACH_PLAY_A_GAME)
+    love.system.submitScore(IDS.LEAD_SURVIVAL_TIME, self.score * 100)
+  end
 
   PlayState.MUSIC:stop()
   if self.newrecord then
@@ -31,9 +33,8 @@ function Dead:overlay()
   end
 end
 
-function Dead:mousepressed(x, y, button, istouch)
-  PlayState.mousepressed(self, x, y, button, istouch)
-  if not istouch and not love.mouse.isDown(1) then return end
-  if self.ignore_touch then return end
+function Dead:touchpressed(id, x, y, dx, dy, pressure)
+  PlayState.touchpressed(self, id, x, y, dx, dy, pressure)
+  if self.ignore_touch[id] then return end
   self:startGame()
 end

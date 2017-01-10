@@ -27,10 +27,11 @@ function PlayState:initialize()
     love.system.showAchievements()
   end, false)
 
-  table.insert(self.buttons, self.signin_button)
-  -- table.insert(self.buttons, self.practice_mode_button)
-  table.insert(self.buttons, self.leaderboard_button)
-  table.insert(self.buttons, self.achievements_button)
+  if ANDROID then
+    table.insert(self.buttons, self.signin_button)
+    table.insert(self.buttons, self.leaderboard_button)
+    table.insert(self.buttons, self.achievements_button)
+  end
 
   GameState.initialize(self)
   self:reset()
@@ -47,11 +48,8 @@ function PlayState:initialize()
 
   self.white_fader = { time = 1.0, duration = 1.0 }
 
-  -- Whether or not the current touch should be ignored.
-  self.ignore_touch = false
-
-
-  self.touch_first_frame = true
+  -- A table of touches that should be ignored.
+  self.ignore_touch = {}
 end
 
 function PlayState:flashWhite(duration)
@@ -101,45 +99,6 @@ end
 
 function PlayState:resize(w, h) self:calculateScale() end
 
-function PlayState:mousepressed(x, y, button, istouch)
-  GameState.mousepressed(self, x, y, button, istouch)
-  if not istouch or not love.mouse.isDown(1) then return end
-
-  for _, button in ipairs(self.buttons) do
-    if button:containsPoint(x, y) then
-      self.ignore_touch = true
-      button.action()
-      break
-    end
-  end
-
-  if istouch and y < PlayState.VMARGIN then
-    self.ignore_touch = true
-  end
-  if istouch and y > love.graphics.getHeight() - PlayState.VMARGIN then
-    self.ignore_touch = true
-  end
-end
-
-function PlayState:mousereleased(x, y, button, isTouch)
-  self.ignore_touch = false
-  self.touch_first_frame = true
-end
-
-function PlayState:mousemoved(x, y, dx, dy, istouch )
-  GameState.mousemoved(self, x, y, dx, dy, istouch)
-  if not istouch and not love.mouse.isDown(1) then return end
-
-  if self.ignore_touch then return end
-
-  if self.touch_first_frame then
-    self.touch_first_frame = false
-    return
-  end
-
-  self.player:move(dx / self.scale, dy / self.scale)
-end
-
 function PlayState:startGame()
   self:reset()
   self:gotoState('FallingBlocks')
@@ -158,10 +117,12 @@ function PlayState:updateButtons(dt)
     button:update(dt)
   end
 
-  local connected = love.system.isGooglePlayConnected()
-  self.signin_button.enabled = not connected
-  self.leaderboard_button.enabled = connected
-  self.achievements_button.enabled = connected
+  if ANDROID then
+    local connected = love.system.isGooglePlayConnected()
+    self.signin_button.enabled = not connected
+    self.leaderboard_button.enabled = connected
+    self.achievements_button.enabled = connected
+  end
 end
 
 function PlayState:showButtons()
@@ -181,7 +142,10 @@ function PlayState:update(dt)
 
     if self.bestscore ~= nil then
       PlayState.NEWRECORD_SOUND:play()
-      love.system.unlockAchievement(IDS.ACH_BEAT_YOUR_PERSONAL_BEST)
+
+      if ANDROID then
+        love.system.unlockAchievement(IDS.ACH_BEAT_YOUR_PERSONAL_BEST)
+      end
     end
   end
 
@@ -221,6 +185,32 @@ function PlayState:overlay()
       255 * (1 - (self.white_fader.time / self.white_fader.duration)))
     love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
   end
+end
+
+function PlayState:touchpressed(id, x, y, dx, dy, pressure)
+  GameState.touchpressed(self, id, x, y, dx, dy, pressure)
+
+  for _, button in ipairs(self.buttons) do
+    if button:containsPoint(x, y) then
+      self.ignore_touch[id] = true
+      button.action()
+      break
+    end
+  end
+
+  if y < PlayState.VMARGIN or y > love.graphics.getHeight() - PlayState.VMARGIN then
+    self.ignore_touch[id] = true
+  end
+end
+
+function PlayState:touchreleased(id, x, y, dx, dy, pressure)
+  self.ignore_touch[id] = false
+end
+
+function PlayState:touchmoved(id, x, y, dx, dy, pressure)
+  GameState.touchmoved(self, id, x, y, dx, dy, pressure)
+  if self.ignore_touch[id] then return end
+  self.player:move(dx / self.scale, dy / self.scale)
 end
 
 require_dir "src/phases"

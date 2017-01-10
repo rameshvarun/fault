@@ -35,10 +35,8 @@ function Initial:update(dt)
   self:updateButtons(dt)
 end
 
-function Initial:mousepressed(x, y, button, istouch)
-  PlayState.mousepressed(self, x, y, button, istouch)
-  if not istouch and not love.mouse.isDown(1) then return end
-
-  if self.ignore_touch then return end
+function Initial:touchpressed(id, x, y, dx, dy, pressure)
+  PlayState.touchpressed(self, id, x, y, dx, dy, pressure)
+  if self.ignore_touch[id] then return end
   self:startGame()
 end

@@ -103,4 +103,19 @@ function GameState:getEntitiesByTag(tag)
   return entities
 end
 
+-- Turn mouse clicks into a touch.
+function GameState:mousepressed(x, y, button, istouch)
+  if istouch or button ~= 1 then return end
+  self:touchpressed('mouse', x, y, 0, 0, 0)
+end
+function GameState:mousereleased(x, y, button, istouch)
+  if istouch or button ~= 1 then return end
+  self:touchreleased('mouse', x, y, 0, 0, 0)
+end
+function GameState:mousemoved(x, y, dx, dy, istouch)
+  if istouch or not love.mouse.isDown(1) then return end
+  self:touchmoved('mouse', x, y, dx, dy, 0)
+end
+
+
 require_dir "src/states"
