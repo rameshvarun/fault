@@ -4,7 +4,10 @@ PlayState.static.NEWRECORD_SOUND = love.audio.newSource( 'assets/sound/newrecord
 PlayState.static.NEWRECORD_SOUND:setVolume(0.2)
 
 PlayState.static.MUSIC = love.audio.newSource('assets/sound/music.mp3', 'stream')
+PlayState.MUSIC:setLooping(true)
 PlayState.MUSIC:setVolume(0.3)
+PlayState.static.MUSIC_STARTS = {0, 52.18}
+
 
 PlayState.static.VMARGIN = 20
 
@@ -47,6 +50,8 @@ function PlayState:initialize()
   end
 
   self.white_fader = { time = 1.0, duration = 1.0 }
+
+  self.attempts = 0
 
   -- A table of touches that should be ignored.
   self.ignore_touch = {}
@@ -103,6 +108,10 @@ function PlayState:startGame()
   self:reset()
   self:gotoState('FallingBlocks')
   PlayState.MUSIC:play()
+
+  PlayState.MUSIC:seek(PlayState.MUSIC_STARTS[math.floor(self.attempts / 5) % #PlayState.MUSIC_STARTS + 1])
+  self.attempts = self.attempts + 1
+
   self:hideButtons()
 end
 
