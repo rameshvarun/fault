@@ -52,6 +52,7 @@ function MenuButton:overlay(scale)
 end
 
 function MenuButton:containsPoint(x, y)
+  if self.click_target == nil then return end
   if x > self.click_target.left and x < self.click_target.right
     and y > self.click_target.top and y < self.click_target.bottom then
       return true
