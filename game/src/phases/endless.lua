@@ -11,12 +11,17 @@ function Endless:enteredState()
   self.speed = 3*60
   self.scaling = 2
   self.block_timer = 0
+
+  self.endlesstime = 0
 end
 
 function Endless:update(dt)
   PlayState.update(self, dt)
 
-  self.scaling = self.scaling + dt * 0.025
+  self.endlesstime = self.endlesstime + dt
+  if self.scaling < 4 then self.scaling = 2 + self.endlesstime * 0.1
+  else self.scaling = 4 end
+
   self.block_timer = self.block_timer + dt*self.scaling
   if self.block_timer > 0.5 then
     self.block_timer = 0
