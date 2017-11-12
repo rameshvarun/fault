@@ -21,9 +21,10 @@ require "src.entity" -- Load in entities.
 
 -- Platform info.
 ANDROID = love.system.getOS() == "Android"
+IOS = love.system.getOS() == "iOS"
 
 -- Android should launch in immersive mode.
-if ANDROID then love.window.setFullscreen(true) end
+if ANDROID or IOS then love.window.setFullscreen(true) end
 
 function love.load(arg)
   if arg[2] == 'debug' then DEBUG = true end
