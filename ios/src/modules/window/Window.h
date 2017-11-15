@@ -175,6 +175,9 @@ public:
 	virtual int showMessageBox(const MessageBoxData &data) = 0;
 
 	virtual void requestAttention(bool continuous) = 0;
+	
+	// iPhone X Safe Area (Notch)
+	virtual void getSafeAreaInsets(double &left, double &top, double &right, double &bottom) const = 0;
 
 	static bool getConstant(const char *in, Setting &out);
 	static bool getConstant(Setting in, const char *&out);

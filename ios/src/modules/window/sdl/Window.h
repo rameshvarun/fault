@@ -107,6 +107,9 @@ public:
 	void requestAttention(bool continuous);
 
 	const char *getName() const;
+	
+	// iPhone X Safe Area (Notch)
+	void getSafeAreaInsets(double &left, double &top, double &right, double &bottom) const;
 
 private:
 

@@ -167,14 +167,23 @@ function PlayState:overlay()
   local trap_bottom_width = 40 * self.scale
   local trap_height = 30 * self.scale
 
+  local score_top = 0
+  if IOS then
+    local left, top, right, bottom = love.window.getSafeAreaInsets()
+    score_top = 0.65 * top * love.window.getPixelScale()
+  end
+
   Color.WHITE:use()
-  love.graphics.polygon('fill', love.graphics.getWidth()/2 - trap_width/2, 0,
-    love.graphics.getWidth()/2 + trap_width/2, 0, love.graphics.getWidth()/2 + trap_bottom_width / 2, trap_height,
-    love.graphics.getWidth()/2 - trap_bottom_width/2, trap_height)
+  love.graphics.polygon('fill',
+    love.graphics.getWidth()/2 - trap_width/2, score_top,
+    love.graphics.getWidth()/2 + trap_width/2, score_top,
+    love.graphics.getWidth()/2 + trap_bottom_width / 2, score_top + trap_height,
+    love.graphics.getWidth()/2 - trap_bottom_width/2, score_top + trap_height)
 
   Color.BLACK:use()
   love.graphics.setFont(self.time_font)
-  love.graphics.printf(string.format("%.1f", self.score), love.graphics.getWidth()/2 - trap_width/2, self.scale*3.5, trap_width, "center")
+  love.graphics.printf(string.format("%.1f", self.score),
+    love.graphics.getWidth()/2 - trap_width/2, score_top + self.scale*3.5, trap_width, "center")
 
   if self.bestscore ~= nil and self.newrecord and self.newrecord_visible then
     Color.WHITE:use()

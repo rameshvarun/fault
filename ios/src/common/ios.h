@@ -26,6 +26,7 @@
 #ifdef LOVE_IOS
 
 #include <string>
+#include <SDL.h>
 
 namespace love
 {
@@ -63,6 +64,11 @@ std::string getExecutablePath();
  * Causes devices with vibration support to vibrate for about 0.5 seconds.
  **/
 void vibrate();
+	
+/**
+ * Get the safe area insets for a given SDLWindow.
+ */
+void getSafeAreaInsets(SDL_Window *window, double &left, double &top, double &right, double &bottom);
 
 } // ios
 } // love

@@ -27,6 +27,10 @@
 #include "common/android.h"
 #endif
 
+#ifdef LOVE_IOS
+#include "common/ios.h"
+#endif
+
 // C++
 #include <iostream>
 #include <vector>
@@ -1063,6 +1067,13 @@ void Window::requestAttention(bool continuous)
 #endif
 	
 	// TODO: Linux?
+}
+	
+void Window::getSafeAreaInsets(double &left, double &top, double &right, double &bottom) const
+{
+#ifdef LOVE_IOS
+	love::ios::getSafeAreaInsets(window, left, top, right, bottom);
+#endif
 }
 
 const char *Window::getName() const

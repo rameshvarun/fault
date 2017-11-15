@@ -509,6 +509,22 @@ int w_requestAttention(lua_State *L)
 	instance()->requestAttention(continuous);
 	return 0;
 }
+	
+int w_getSafeAreaInsets(lua_State *L)
+{
+	double left = 0.0;
+	double top = 0.0;
+	double right = 0.0;
+	double bottom = 0.0;
+	
+	instance()->getSafeAreaInsets(left, top, right, bottom);
+	
+	lua_pushnumber(L, left);
+	lua_pushnumber(L, top);
+	lua_pushnumber(L, right);
+	lua_pushnumber(L, bottom);
+	return 4;
+}
 
 static const luaL_Reg functions[] =
 {
@@ -542,6 +558,7 @@ static const luaL_Reg functions[] =
 	{ "isMaximized", w_isMaximized },
 	{ "showMessageBox", w_showMessageBox },
 	{ "requestAttention", w_requestAttention },
+	{ "getSafeAreaInsets", w_getSafeAreaInsets },
 	{ 0, 0 }
 };
 

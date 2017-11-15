@@ -29,6 +29,7 @@
 
 #include <vector>
 
+#include <SDL_syswm.h>
 #include <SDL_events.h>
 
 static NSArray *getLovesInDocuments();
@@ -341,6 +342,22 @@ void vibrate()
 	@autoreleasepool
 	{
 		AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+	}
+}
+	
+void getSafeAreaInsets(SDL_Window *window, double &left, double &top, double &right, double &bottom) {
+	SDL_SysWMinfo wminfo = {};
+	SDL_VERSION(&wminfo.version);
+	SDL_GetWindowWMInfo(window, &wminfo);
+
+	if (@available(iOS 11, *)) {
+		UIEdgeInsets insets = wminfo.info.uikit.window.safeAreaInsets;
+		left = insets.left;
+		top = insets.top;
+		right = insets.right;
+		bottom = insets.bottom;
+	} else {
+		left = top = right = bottom = 0.0;
 	}
 }
 
