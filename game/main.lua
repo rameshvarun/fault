@@ -26,6 +26,9 @@ IOS = love.system.getOS() == "iOS"
 -- Android should launch in immersive mode.
 if ANDROID or IOS then love.window.setFullscreen(true) end
 
+-- iOS should immediately start to authenticate local player
+if IOS then love.system.authenticateLocalPlayer() end
+
 function love.load(arg)
   if arg[2] == 'debug' then DEBUG = true end
   GameState.switchTo(PlayState()) -- Switch to the initial game state.

@@ -105,6 +105,9 @@ public:
 	 * @param number of seconds to vibrate.
 	 */
 	virtual void vibrate(double seconds) const;
+	
+	virtual void authenticateLocalPlayer() const;
+	virtual void showAchievements() const;
 
 	static bool getConstant(const char *in, PowerState &out);
 	static bool getConstant(PowerState in, const char *&out);

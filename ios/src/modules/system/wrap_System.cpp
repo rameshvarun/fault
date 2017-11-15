@@ -92,7 +92,19 @@ int w_vibrate(lua_State *L)
 	instance()->vibrate(seconds);
 	return 0;
 }
+	
+int w_authenticateLocalPlayer(lua_State *L)
+{
+	instance()->authenticateLocalPlayer();
+	return 0;
+}
 
+int w_showAchievements(lua_State *L)
+{
+	instance()->showAchievements();
+	return 0;
+}
+	
 static const luaL_Reg functions[] =
 {
 	{ "getOS", w_getOS },
@@ -102,6 +114,8 @@ static const luaL_Reg functions[] =
 	{ "getPowerInfo", w_getPowerInfo },
 	{ "openURL", w_openURL },
 	{ "vibrate", w_vibrate },
+	{ "authenticateLocalPlayer", w_authenticateLocalPlayer },
+	{ "showAchievements", w_showAchievements },
 	{ 0, 0 }
 };
 

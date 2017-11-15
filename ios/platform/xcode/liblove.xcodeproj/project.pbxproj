@@ -758,8 +758,6 @@
 		FA0B7EAF1A95902C000E1D17 /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA0B7C9C1A95902C000E1D17 /* System.cpp */; };
 		FA0B7EB01A95902C000E1D17 /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA0B7C9C1A95902C000E1D17 /* System.cpp */; };
 		FA0B7EB11A95902C000E1D17 /* System.h in Headers */ = {isa = PBXBuildFile; fileRef = FA0B7C9D1A95902C000E1D17 /* System.h */; };
-		FA0B7EB21A95902C000E1D17 /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA0B7C9E1A95902C000E1D17 /* System.cpp */; };
-		FA0B7EB31A95902C000E1D17 /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA0B7C9E1A95902C000E1D17 /* System.cpp */; };
 		FA0B7EB41A95902C000E1D17 /* System.h in Headers */ = {isa = PBXBuildFile; fileRef = FA0B7C9F1A95902C000E1D17 /* System.h */; };
 		FA0B7EB51A95902C000E1D17 /* wrap_System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA0B7CA01A95902C000E1D17 /* wrap_System.cpp */; };
 		FA0B7EB61A95902C000E1D17 /* wrap_System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA0B7CA01A95902C000E1D17 /* wrap_System.cpp */; };
@@ -1458,7 +1456,6 @@
 		FA0B7C991A95902C000E1D17 /* wrap_SoundData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wrap_SoundData.h; sourceTree = "<group>"; };
 		FA0B7C9C1A95902C000E1D17 /* System.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = System.cpp; sourceTree = "<group>"; };
 		FA0B7C9D1A95902C000E1D17 /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
-		FA0B7C9E1A95902C000E1D17 /* System.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = System.cpp; sourceTree = "<group>"; };
 		FA0B7C9F1A95902C000E1D17 /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
 		FA0B7CA01A95902C000E1D17 /* wrap_System.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wrap_System.cpp; sourceTree = "<group>"; };
 		FA0B7CA11A95902C000E1D17 /* wrap_System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wrap_System.h; sourceTree = "<group>"; };
@@ -2652,7 +2649,6 @@
 			isa = PBXGroup;
 			children = (
 				FA0B7C9B1A95902C000E1D17 /* sdl */,
-				FA0B7C9E1A95902C000E1D17 /* System.cpp */,
 				FA0B7C9F1A95902C000E1D17 /* System.h */,
 				FA0B7CA01A95902C000E1D17 /* wrap_System.cpp */,
 				FA0B7CA11A95902C000E1D17 /* wrap_System.h */,
@@ -3538,7 +3534,6 @@
 				FA0B7B221A958EA3000E1D17 /* luasocket.cpp in Sources */,
 				FA0B7D311A95902C000E1D17 /* Graphics.cpp in Sources */,
 				FA0B7E9E1A95902C000E1D17 /* WaveDecoder.cpp in Sources */,
-				FA0B7EB31A95902C000E1D17 /* System.cpp in Sources */,
 				FA0B7D1C1A95902C000E1D17 /* GlyphData.cpp in Sources */,
 				FA0B7AAE1A958EA3000E1D17 /* b2WheelJoint.cpp in Sources */,
 				FA0B7E671A95902C000E1D17 /* wrap_PrismaticJoint.cpp in Sources */,
@@ -3832,7 +3827,6 @@
 				FA0B7AE71A958EA3000E1D17 /* except.c in Sources */,
 				FA0B7D301A95902C000E1D17 /* Graphics.cpp in Sources */,
 				FA0B7E9D1A95902C000E1D17 /* WaveDecoder.cpp in Sources */,
-				FA0B7EB21A95902C000E1D17 /* System.cpp in Sources */,
 				FA0B7D1B1A95902C000E1D17 /* GlyphData.cpp in Sources */,
 				FA0B7AD11A958EA3000E1D17 /* protocol.c in Sources */,
 				FA0B7E661A95902C000E1D17 /* wrap_PrismaticJoint.cpp in Sources */,

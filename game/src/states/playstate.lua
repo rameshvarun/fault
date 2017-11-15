@@ -36,6 +36,13 @@ function PlayState:initialize()
     table.insert(self.buttons, self.achievements_button)
   end
 
+  if IOS then
+    table.insert(self.buttons, self.leaderboard_button)
+    self.leaderboard_button.enabled = true
+    table.insert(self.buttons, self.achievements_button)
+    self.achievements_button.enabled = true
+  end
+
   GameState.initialize(self)
   self:reset()
   self.cam:lookAt(0, 0)

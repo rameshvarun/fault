@@ -26,6 +26,7 @@
 #include <CoreServices/CoreServices.h>
 #elif defined(LOVE_IOS)
 #include "common/ios.h"
+#include "GameCenterManager.h"
 #elif defined(LOVE_LINUX) || defined(LOVE_ANDROID)
 #include <signal.h>
 #include <sys/wait.h>
@@ -182,6 +183,17 @@ void System::vibrate(double seconds) const
 #else
 	LOVE_UNUSED(seconds);
 #endif
+}
+	
+void System::authenticateLocalPlayer() const
+{
+	[[GameCenterManager sharedManager] setupManager];
+}
+	
+void System::showAchievements() const
+{
+	UIViewController* viewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+	[[GameCenterManager sharedManager] presentAchievementsOnViewController:viewController];
 }
 
 bool System::getConstant(const char *in, System::PowerState &out)
