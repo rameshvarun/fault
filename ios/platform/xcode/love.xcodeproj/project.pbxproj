@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		936754221FB853F900A742FE /* game.love in Resources */ = {isa = PBXBuildFile; fileRef = 936754211FB853F700A742FE /* game.love */; };
+		937C2ABD1FB9205800FA0085 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 937C2ABC1FB9205800FA0085 /* Launch Screen.storyboard */; };
 		A9255DD11043183600BA1496 /* FreeType.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = A93E6E4810420B4A007D418B /* FreeType.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		A9255DD31043183600BA1496 /* Lua.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = A93E6E5310420B57007D418B /* Lua.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		A9255E031043195A00BA1496 /* Vorbis.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = A9255E021043195A00BA1496 /* Vorbis.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -35,7 +36,6 @@
 		FA5D249C1A96CF4300C6FC8F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA5D249A1A96CF4300C6FC8F /* Images.xcassets */; };
 		FA5D24C21A96D78000C6FC8F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA5D24C11A96D78000C6FC8F /* Foundation.framework */; };
 		FA5D24D11A96E73300C6FC8F /* liblove.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0B7EEF1A95924A000E1D17 /* liblove.a */; };
-		FA7C636A1A9C49570000FD29 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA7C63691A9C49570000FD29 /* Launch Screen.xib */; };
 		FA9B4A0A16E1579F00074F42 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9B4A0916E1579F00074F42 /* SDL2.framework */; };
 		FA9B4A0B16E157B500074F42 /* SDL2.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = FA9B4A0916E1579F00074F42 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		FAAFF04716CB120000CCDE45 /* OpenAL-Soft.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = FAAFF04616CB120000CCDE45 /* OpenAL-Soft.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -102,6 +102,7 @@
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		8D1107320486CEB800E47090 /* love.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = love.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		936754211FB853F700A742FE /* game.love */ = {isa = PBXFileReference; lastKnownFileType = file; name = game.love; path = ../../../game.love; sourceTree = "<group>"; };
+		937C2ABC1FB9205800FA0085 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "ios/Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A9255E021043195A00BA1496 /* Vorbis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vorbis.framework; path = /Library/Frameworks/Vorbis.framework; sourceTree = "<absolute>"; };
 		A9255F51104324D700BA1496 /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = /Library/Frameworks/Ogg.framework; sourceTree = "<absolute>"; };
 		A93E6A3410420AC0007D418B /* love.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = love.cpp; path = ../../src/love.cpp; sourceTree = "<group>"; };
@@ -128,7 +129,6 @@
 		FA5D24971A96CE1E00C6FC8F /* love-ios.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "love-ios.plist"; path = "ios/love-ios.plist"; sourceTree = "<group>"; };
 		FA5D249A1A96CF4300C6FC8F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FA5D24C11A96D78000C6FC8F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		FA7C63691A9C49570000FD29 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "Launch Screen.xib"; path = "ios/Launch Screen.xib"; sourceTree = "<group>"; };
 		FA9B4A0916E1579F00074F42 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = /Library/Frameworks/SDL2.framework; sourceTree = "<absolute>"; };
 		FAAFF04616CB120000CCDE45 /* OpenAL-Soft.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "OpenAL-Soft.framework"; path = "/Library/Frameworks/OpenAL-Soft.framework"; sourceTree = "<absolute>"; };
 		FAC1A448196F5DC600125284 /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = license.txt; path = ../../license.txt; sourceTree = "<group>"; };
@@ -267,9 +267,9 @@
 		FA5D24A01A96CF7200C6FC8F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				FA7C63691A9C49570000FD29 /* Launch Screen.xib */,
 				FA5D24971A96CE1E00C6FC8F /* love-ios.plist */,
 				A97E3842132A9EDE00198A2F /* love-macosx.plist */,
+				937C2ABC1FB9205800FA0085 /* Launch Screen.storyboard */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -389,7 +389,7 @@
 			files = (
 				936754221FB853F900A742FE /* game.love in Resources */,
 				FA5D249C1A96CF4300C6FC8F /* Images.xcassets in Resources */,
-				FA7C636A1A9C49570000FD29 /* Launch Screen.xib in Resources */,
+				937C2ABD1FB9205800FA0085 /* Launch Screen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,7 +599,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iOS AppIcon";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "iOS LaunchImage";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -633,7 +632,7 @@
 					ios/include/SDL2,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/ios/love-ios.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = net.varunramesh.fault;
@@ -648,7 +647,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iOS AppIcon";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "iOS LaunchImage";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -677,7 +675,7 @@
 					ios/include/SDL2,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/ios/love-ios.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = net.varunramesh.fault;
@@ -693,7 +691,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iOS AppIcon";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "iOS LaunchImage";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -722,7 +719,7 @@
 					ios/include/SDL2,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/ios/love-ios.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = net.varunramesh.fault;
