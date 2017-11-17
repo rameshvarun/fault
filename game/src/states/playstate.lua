@@ -103,9 +103,15 @@ function PlayState:calculateScale()
   self.endless_font = love.graphics.newFont("assets/roboto.ttf", 20*self.scale)
   self.endless_font:setFilter('nearest', 'nearest', 0)
 
+  local button_top = 0
+  if IOS then
+    local left, top, right, bottom = love.window.getSafeAreaInsets()
+    button_top = top * love.window.getPixelScale()
+  end
+
   for i, button in ipairs(self.buttons) do
     button.pos.x = love.graphics.getWidth()
-    button.pos.y = 40 * self.scale * i
+    button.pos.y = button_top + 40 * self.scale * i
   end
 end
 
@@ -159,7 +165,7 @@ function PlayState:update(dt)
     if self.bestscore ~= nil then
       PlayState.NEWRECORD_SOUND:play()
 
-      if ANDROID then
+      if ANDROID or IOS then
         love.system.unlockAchievement(IDS.ACH_BEAT_YOUR_PERSONAL_BEST)
       end
     end

@@ -108,6 +108,11 @@ public:
 	
 	virtual void authenticateLocalPlayer() const;
 	virtual void showAchievements() const;
+	virtual void showLeaderboard(const std::string &id) const;
+	virtual void submitScore(const std::string &id, const double score) const;
+	
+	virtual void saveAchievementPercentage(const std::string &id, const double progress) const;
+	virtual void unlockAchievement(const std::string &id) const;
 
 	static bool getConstant(const char *in, PowerState &out);
 	static bool getConstant(PowerState in, const char *&out);

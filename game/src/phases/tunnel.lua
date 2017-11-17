@@ -3,7 +3,7 @@ local Tunnel = PlayState:addState('Tunnel')
 local DURATION = 35.2 - 23.5
 
 function Tunnel:enteredState()
-  if ANDROID then
+  if ANDROID or IOS then
     love.system.unlockAchievement(IDS.ACH_REACH_THE_TUNNEL)
   end
 

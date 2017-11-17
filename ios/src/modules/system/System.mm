@@ -195,6 +195,30 @@ void System::showAchievements() const
 	UIViewController* viewController = [UIApplication sharedApplication].keyWindow.rootViewController;
 	[[GameCenterManager sharedManager] presentAchievementsOnViewController:viewController];
 }
+	
+void System::showLeaderboard(const std::string &id) const
+{
+	NSString* lead_id = [NSString stringWithUTF8String:id.c_str()];
+	UIViewController* viewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+	[[GameCenterManager sharedManager] presentLeaderboardsOnViewController:viewController withLeaderboard:lead_id];
+}
+	
+void System::submitScore(const std::string &id, const double score) const
+{
+	NSString* lead_id = [NSString stringWithUTF8String:id.c_str()];
+	[[GameCenterManager sharedManager] saveAndReportScore:(long long)score leaderboard:lead_id sortOrder:GameCenterSortOrderHighToLow];
+}
+	
+void System::saveAchievementPercentage(const std::string &id, const double progress) const
+{
+	NSString* ach_id = [NSString stringWithUTF8String:id.c_str()];
+	[[GameCenterManager sharedManager] saveAndReportAchievement:ach_id percentComplete:progress shouldDisplayNotification:YES];
+}
+	
+void System::unlockAchievement(const std::string &id) const
+{
+	saveAchievementPercentage(id, 100);
+}
 
 bool System::getConstant(const char *in, System::PowerState &out)
 {

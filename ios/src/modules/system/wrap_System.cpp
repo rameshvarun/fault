@@ -105,6 +105,28 @@ int w_showAchievements(lua_State *L)
 	return 0;
 }
 	
+int w_showLeaderboard(lua_State *L)
+{
+	std::string id = luax_checkstring(L, 1);
+	instance()->showLeaderboard(id);
+	return 0;
+}
+	
+int w_submitScore(lua_State *L)
+{
+	std::string id = luax_checkstring(L, 1);
+	double score = luaL_checknumber(L, 2);
+	instance()->submitScore(id, score);
+	return 0;
+}
+	
+int w_unlockAchievement(lua_State *L)
+{
+	std::string id = luax_checkstring(L, 1);
+	instance()->unlockAchievement(id);
+	return 0;
+}
+	
 static const luaL_Reg functions[] =
 {
 	{ "getOS", w_getOS },
@@ -116,6 +138,9 @@ static const luaL_Reg functions[] =
 	{ "vibrate", w_vibrate },
 	{ "authenticateLocalPlayer", w_authenticateLocalPlayer },
 	{ "showAchievements", w_showAchievements },
+	{ "showLeaderboard", w_showLeaderboard },
+	{ "submitScore", w_submitScore },
+	{ "unlockAchievement", w_unlockAchievement },
 	{ 0, 0 }
 };
 

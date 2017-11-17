@@ -1,5 +1,9 @@
 require 'utils' -- Load in utilities.
 
+-- Platform info.
+ANDROID = love.system.getOS() == "Android"
+IOS = love.system.getOS() == "iOS"
+
 IDS = require 'src.ids' -- IDs for achievements and leaderboards.
 
 inspect = require 'external.inspect' -- Pretty printing Lua objects.
@@ -18,10 +22,6 @@ Color = require 'src.color' -- Load in the color library.
 
 require "src.gamestate" -- Load in game states.
 require "src.entity" -- Load in entities.
-
--- Platform info.
-ANDROID = love.system.getOS() == "Android"
-IOS = love.system.getOS() == "iOS"
 
 -- Android should launch in immersive mode.
 if ANDROID or IOS then love.window.setFullscreen(true) end
