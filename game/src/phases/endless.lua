@@ -1,7 +1,7 @@
 local Endless = PlayState:addState('Endless')
 
 function Endless:enteredState()
-  if ANDROID then
+  if ANDROID or IOS then
     love.system.unlockAchievement(IDS.ACH_REACH_ENDLESS_MODE)
   end
 

@@ -118,7 +118,6 @@ function FallingBlocks:update(dt)
     return
   end
 
-  local missed_time = -self.blocks[1].t
   while #self.blocks > 0 and self.blocks[1].t <= 0 do
     local curr = table.remove(self.blocks, 1)
     local size = vector(curr.width*PlayArea.SIZE, curr.height or 10)
@@ -126,6 +125,11 @@ function FallingBlocks:update(dt)
       - PlayArea.SIZE/2 - 200 + size.y / 2)
 
     local velocity = vector(0, BLOCK_SPEED)
+
+    local missed_time = -curr.t
+    if #self.blocks > 0 then
+      self.blocks[1].t = self.blocks[1].t - missed_time
+    end
 
     local block = Block(pos, 0, size, velocity, Color.RED)
     self:addEntity(block)

@@ -3,7 +3,7 @@ local Ships = PlayState:addState('Ships')
 local PHASE_DURATION = 23.5 - 11.75
 
 function Ships:enteredState()
-  if ANDROID then
+  if ANDROID or IOS then
     -- Unlock achievement for reaching the ships state.
     love.system.unlockAchievement(IDS.ACH_REACH_THE_SHIPS)
   end

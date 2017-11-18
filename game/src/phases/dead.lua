@@ -1,7 +1,7 @@
 local Dead = PlayState:addState('Dead')
 
 function Dead:enteredState()
-  if ANDROID then
+  if ANDROID or IOS then
     love.system.unlockAchievement(IDS.ACH_PLAY_A_GAME)
     love.system.submitScore(IDS.LEAD_SURVIVAL_TIME, self.score * 100)
   end

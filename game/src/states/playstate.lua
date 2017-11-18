@@ -36,6 +36,13 @@ function PlayState:initialize()
     table.insert(self.buttons, self.achievements_button)
   end
 
+  if IOS then
+    table.insert(self.buttons, self.leaderboard_button)
+    self.leaderboard_button.enabled = true
+    table.insert(self.buttons, self.achievements_button)
+    self.achievements_button.enabled = true
+  end
+
   GameState.initialize(self)
   self:reset()
   self.cam:lookAt(0, 0)
@@ -96,9 +103,15 @@ function PlayState:calculateScale()
   self.endless_font = love.graphics.newFont("assets/roboto.ttf", 20*self.scale)
   self.endless_font:setFilter('nearest', 'nearest', 0)
 
+  local button_top = 0
+  if IOS then
+    local left, top, right, bottom = love.window.getSafeAreaInsets()
+    button_top = top * love.window.getPixelScale()
+  end
+
   for i, button in ipairs(self.buttons) do
     button.pos.x = love.graphics.getWidth()
-    button.pos.y = 40 * self.scale * i
+    button.pos.y = button_top + 40 * self.scale * i
   end
 end
 
@@ -152,7 +165,7 @@ function PlayState:update(dt)
     if self.bestscore ~= nil then
       PlayState.NEWRECORD_SOUND:play()
 
-      if ANDROID then
+      if ANDROID or IOS then
         love.system.unlockAchievement(IDS.ACH_BEAT_YOUR_PERSONAL_BEST)
       end
     end
@@ -167,14 +180,23 @@ function PlayState:overlay()
   local trap_bottom_width = 40 * self.scale
   local trap_height = 30 * self.scale
 
+  local score_top = 0
+  if IOS then
+    local left, top, right, bottom = love.window.getSafeAreaInsets()
+    score_top = 0.65 * top * love.window.getPixelScale()
+  end
+
   Color.WHITE:use()
-  love.graphics.polygon('fill', love.graphics.getWidth()/2 - trap_width/2, 0,
-    love.graphics.getWidth()/2 + trap_width/2, 0, love.graphics.getWidth()/2 + trap_bottom_width / 2, trap_height,
-    love.graphics.getWidth()/2 - trap_bottom_width/2, trap_height)
+  love.graphics.polygon('fill',
+    love.graphics.getWidth()/2 - trap_width/2, score_top,
+    love.graphics.getWidth()/2 + trap_width/2, score_top,
+    love.graphics.getWidth()/2 + trap_bottom_width / 2, score_top + trap_height,
+    love.graphics.getWidth()/2 - trap_bottom_width/2, score_top + trap_height)
 
   Color.BLACK:use()
   love.graphics.setFont(self.time_font)
-  love.graphics.printf(string.format("%.1f", self.score), love.graphics.getWidth()/2 - trap_width/2, self.scale*3.5, trap_width, "center")
+  love.graphics.printf(string.format("%.1f", self.score),
+    love.graphics.getWidth()/2 - trap_width/2, score_top + self.scale*3.5, trap_width, "center")
 
   if self.bestscore ~= nil and self.newrecord and self.newrecord_visible then
     Color.WHITE:use()
