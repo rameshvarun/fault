@@ -9,6 +9,12 @@ function DrawBestScore(self)
     love.graphics.getWidth(), "center")
 end
 
+function Initial:enteredState()
+  if PLAY_RECORDING then
+    Timer.after(2, function() self:startGame() end)
+  end
+end
+
 function Initial:overlay()
     PlayState.overlay(self)
 
@@ -33,8 +39,6 @@ end
 function Initial:update(dt)
   GameState.update(self, dt)
   self:updateButtons(dt)
-
-  if PLAY_RECORDING then self:startGame() end
 end
 
 function Initial:touchpressed(id, x, y, dx, dy, pressure)

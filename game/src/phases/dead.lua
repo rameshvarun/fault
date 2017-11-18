@@ -12,6 +12,10 @@ function Dead:enteredState()
     self.bestscore = self.score
   end
 
+  if PLAY_RECORDING then
+    Timer.after(5, function() love.event.quit(0) end)
+  end
+
   self:showButtons()
 end
 
