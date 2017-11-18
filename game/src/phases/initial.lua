@@ -11,7 +11,7 @@ end
 
 function Initial:enteredState()
   if PLAY_RECORDING then
-    Timer.after(2, function() self:startGame() end)
+    Timer.after(1, function() self:startGame() end)
   end
 end
 

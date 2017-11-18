@@ -13,7 +13,7 @@ function Dead:enteredState()
   end
 
   if PLAY_RECORDING then
-    Timer.after(5, function() love.event.quit(0) end)
+    Timer.after(3, function() love.event.quit(0) end)
   end
 
   self:showButtons()
