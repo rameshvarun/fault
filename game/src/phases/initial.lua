@@ -33,6 +33,8 @@ end
 function Initial:update(dt)
   GameState.update(self, dt)
   self:updateButtons(dt)
+
+  if PLAY_RECORDING then self:startGame() end
 end
 
 function Initial:touchpressed(id, x, y, dx, dy, pressure)

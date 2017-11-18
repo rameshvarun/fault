@@ -23,6 +23,10 @@ Color = require 'src.color' -- Load in the color library.
 require "src.gamestate" -- Load in game states.
 require "src.entity" -- Load in entities.
 
+-- Arguments
+CREATE_RECORDING = lume.any(arg, function(x) return x == "--create-recording" end)
+PLAY_RECORDING = lume.any(arg, function(x) return x == "--play-recording" end)
+
 -- Android should launch in immersive mode.
 if ANDROID or IOS then love.window.setFullscreen(true) end
 

@@ -76,6 +76,26 @@ function PlayState:reset()
   self.player = self:addEntity(Player())
   self.score = 0.0
   self.newrecord = false
+
+  if CREATE_RECORDING then
+    RECORDING = assert(io.open('recording.txt', "w"))
+
+    local seed = os.time()
+    math.randomseed(seed)
+    RECORDING:write(seed .. "\n")
+  end
+
+  if PLAY_RECORDING then
+    local rec = love.filesystem.lines('recording.txt')
+    RECORDING = function()
+      local val = rec()
+      return tonumber(val)
+    end
+
+    local seed = RECORDING()
+    CURRENT_CHECKPOINT = RECORDING()
+    math.randomseed(seed)
+  end
 end
 
 function PlayState:calculateScale()
@@ -168,6 +188,20 @@ function PlayState:update(dt)
       if ANDROID or IOS then
         love.system.unlockAchievement(IDS.ACH_BEAT_YOUR_PERSONAL_BEST)
       end
+    end
+  end
+
+  if CREATE_RECORDING then
+    RECORDING:write(self.score .. "\n")
+    RECORDING:write(self.player.pos.x .. "\n")
+    RECORDING:write(self.player.pos.y .. "\n")
+  end
+
+  if PLAY_RECORDING then
+    if CURRENT_CHECKPOINT and self.score >= CURRENT_CHECKPOINT - (1.0/60) then
+      local x, y = RECORDING(), RECORDING()
+      self.player.pos = vector(x, y)
+      CURRENT_CHECKPOINT = RECORDING()
     end
   end
 
