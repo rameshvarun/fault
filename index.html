@@ -11,6 +11,17 @@
   <title>Fault</title>
 
   <link href="styles.css" rel="stylesheet">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.3.7/mobile-detect.min.js"></script>
+  <script>
+    var md = new MobileDetect(window.navigator.userAgent);
+    if (md.is('androidOS')) {
+      window.location = "https://play.google.com/store/apps/details?id=net.varunramesh.fault";
+    }
+    if (md.is('iPhone') || md.is('iPad')) {
+      window.location = "https://itunes.apple.com/us/app/fault-avoid-obstacles/id1314972084?mt=8";
+    }
+  </script>
 </head>
 
 <body>
