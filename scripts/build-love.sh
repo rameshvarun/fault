@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
-rm game.love
+mkdir -p build
+rm -f build/game.love
 cd game
-zip -r ../game.love *
+zip -r ../build/game.love *

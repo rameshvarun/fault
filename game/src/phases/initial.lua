@@ -46,3 +46,7 @@ function Initial:touchpressed(id, x, y, dx, dy, pressure)
   if self.ignore_touch[id] then return end
   self:startGame()
 end
+
+function Initial:touchmoved(id, x, y, dx, dy, pressure)
+  -- Ignore touch moves in Initial phase.
+end

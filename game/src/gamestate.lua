@@ -113,7 +113,7 @@ function GameState:mousereleased(x, y, button, istouch)
   self:touchreleased('mouse', x, y, 0, 0, 0)
 end
 function GameState:mousemoved(x, y, dx, dy, istouch)
-  if istouch or not love.mouse.isDown(1) then return end
+  if istouch then return end
   self:touchmoved('mouse', x, y, dx, dy, 0)
 end
 
