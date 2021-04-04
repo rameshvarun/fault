@@ -3,6 +3,7 @@ require 'utils' -- Load in utilities.
 -- Platform info.
 ANDROID = love.system.getOS() == "Android"
 IOS = love.system.getOS() == "iOS"
+MOBILE = ANDROID or IOS
 
 IDS = require 'src.ids' -- IDs for achievements and leaderboards.
 

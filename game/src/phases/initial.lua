@@ -20,7 +20,10 @@ function Initial:overlay()
 
     Color.WHITE:use()
     love.graphics.setFont(self.instruction_font)
-    love.graphics.printf("TOUCH AND DRAG",
+
+    local prompt = "TOUCH AND DRAG"
+    if not MOBILE then prompt = "CLICK AND DRAG" end
+    love.graphics.printf(prompt,
       love.graphics.getWidth()/2 - 0.5*PlayArea.SIZE*self.scale,
       love.graphics.getHeight()/2 + 25*self.scale,
       PlayArea.SIZE*self.scale,
