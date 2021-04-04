@@ -49,7 +49,8 @@ function PlayState:initialize()
   self:calculateScale()
   self:gotoState('Initial')
 
-  if love.filesystem.getInfo("bestscore").type == "file" then
+  local saveFileInfo = love.filesystem.getInfo("bestscore")
+  if saveFileInfo and saveFileInfo.type == "file" then
     local contents, size = love.filesystem.read("bestscore")
     self.bestscore = tonumber(contents)
   else
