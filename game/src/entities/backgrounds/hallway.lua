@@ -12,7 +12,7 @@ function Hallway:initialize()
 end
 
 function Hallway:draw()
-  love.graphics.setColor(255, 255, 255, 255*0.5)
+  love.graphics.setColor(1, 1, 1, 0.5)
   for _, t in ipairs(self.squares) do
     local pos = vector(
       0, - (1 - 2*(t / Hallway.SQUARE_PERIOD))*80 + 50

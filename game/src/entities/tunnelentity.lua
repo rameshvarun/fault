@@ -102,7 +102,7 @@ end
 
 function TunnelEntity:draw()
   love.graphics.push()
-  love.graphics.setColor(255, 0, 0, 0.8*255)
+  love.graphics.setColor(1, 0, 0, 0.8)
   love.graphics.translate(self.pos:unpack())
   for _, triangle in ipairs(self.left_triangles) do
     love.graphics.polygon('fill', triangle)

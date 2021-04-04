@@ -44,8 +44,8 @@ end
 
 function ModeMenu:overlay()
   if self.white_fader.time < self.white_fader.duration then
-    love.graphics.setColor(255, 255, 255,
-      255 * (1 - (self.white_fader.time / self.white_fader.duration)))
+    love.graphics.setColor(1, 1, 1,
+      1 * (1 - (self.white_fader.time / self.white_fader.duration)))
     love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
   end
 

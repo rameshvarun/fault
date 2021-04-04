@@ -9,7 +9,7 @@ function Color:initialize(r, g, b, a)
   self.r = r
   self.g = g
   self.b = b
-  self.a = a or 255
+  self.a = a or 1
 end
 
 -- Unpack color.
@@ -22,20 +22,20 @@ function Color:clone() return Color(self.r, self.g, self.b, self.a) end
 -- Use this color globally.
 function Color:use() love.graphics.setColor(self.r, self.g, self.b, self.a) end
 
-Color.static.WHITE = Color(255, 255, 255, 255)
-Color.static.BLACK = Color(0, 0, 0, 255)
+Color.static.WHITE = Color(1, 1, 1, 1)
+Color.static.BLACK = Color(0, 0, 0, 1)
 
-Color.static.GREY = Color(128, 128, 128, 255)
+Color.static.GREY = Color(0.5, 0.5, 0.5, 1)
 Color.static.GRAY = Color.static.GREY
 
 Color.static.TRANSPARENT = Color(0, 0, 0, 0)
 
-Color.static.RED = Color(255, 0, 0, 255)
-Color.static.GREEN = Color(0, 255, 0, 255)
-Color.static.BLUE = Color(0, 0, 255, 255)
+Color.static.RED = Color(1, 0, 0, 1)
+Color.static.GREEN = Color(0, 1, 0, 1)
+Color.static.BLUE = Color(0, 0, 1, 1)
 
-Color.static.YELLOW = Color(255, 255, 0, 255)
-Color.static.PURPLE = Color(255, 0, 255, 255)
-Color.static.CYAN = Color(0, 255, 255, 255)
+Color.static.YELLOW = Color(1, 1, 0, 1)
+Color.static.PURPLE = Color(1, 0, 1, 1)
+Color.static.CYAN = Color(0, 1, 1, 1)
 
 return Color

@@ -66,7 +66,7 @@ function Entity:draw() end
 function Entity:debugDraw()
   -- Draw a dot at the location of this entity.
   love.graphics.setPointSize(10)
-  love.graphics.setColor(255, 255, 255, 255)
+  love.graphics.setColor(1, 1, 1, 1)
   love.graphics.points(self.pos:unpack())
 end
 

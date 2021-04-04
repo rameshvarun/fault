@@ -8,6 +8,6 @@ function PlayAreaShadow:draw()
   Entity.draw(self)
 
   -- Draw red team goal.
-  love.graphics.setColor(0, 0, 0, 0.25*255)
+  love.graphics.setColor(0, 0, 0, 0.25)
   love.graphics.rectangle('fill', -PlayArea.SIZE/2, -PlayArea.SIZE/2, PlayArea.SIZE, PlayArea.SIZE)
 end
