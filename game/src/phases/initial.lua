@@ -53,3 +53,11 @@ end
 function Initial:touchmoved(id, x, y, dx, dy, pressure)
   -- Ignore touch moves in Initial phase.
 end
+
+
+function Initial:keypressed(key, scancode, isrepeat)
+  PlayState.keypressed(self, key, scancode, isrepeat)
+  if key == "space" then
+    self:startGame()
+  end
+end

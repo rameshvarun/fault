@@ -211,6 +211,20 @@ function PlayState:update(dt)
 
   self:updateButtons(dt)
   self.white_fader.time = self.white_fader.time + dt
+
+  local KEYBOARD_MOVE_SPEED = 300
+  if love.keyboard.isDown("left") then
+    self.player:move(-KEYBOARD_MOVE_SPEED * dt, 0)
+  end
+  if love.keyboard.isDown("right") then
+    self.player:move(KEYBOARD_MOVE_SPEED * dt, 0)
+  end
+  if love.keyboard.isDown("up") then
+    self.player:move(0, -KEYBOARD_MOVE_SPEED * dt)
+  end
+  if love.keyboard.isDown("down") then
+    self.player:move(0, KEYBOARD_MOVE_SPEED * dt)
+  end
 end
 
 function PlayState:overlay()

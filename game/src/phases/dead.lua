@@ -44,3 +44,10 @@ function Dead:touchpressed(id, x, y, dx, dy, pressure)
   if self.ignore_touch[id] then return end
   self:startGame()
 end
+
+function Dead:keypressed(key, scancode, isrepeat)
+  PlayState.keypressed(self, key, scancode, isrepeat)
+  if key == "space" then
+    self:startGame()
+  end
+end
