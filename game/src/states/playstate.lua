@@ -146,6 +146,9 @@ function PlayState:startGame()
   PlayState.MUSIC:seek(PlayState.MUSIC_STARTS[math.floor(self.attempts / 5) % #PlayState.MUSIC_STARTS + 1])
   self.attempts = self.attempts + 1
 
+  love.mouse.setVisible(false)
+  love.mouse.setGrabbed(true)
+
   self:hideButtons()
 end
 

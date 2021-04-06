@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-mkdir -p build
-rm -f build/game.love
+mkdir -p release
+rm -f release/fault.love
 cd game
-zip -r ../build/game.love *
+zip -r ../release/fault.love *

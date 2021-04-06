@@ -29,7 +29,7 @@ function Block:update(dt)
   self:updateCollisionShape()
 
   self.life = self.life + dt
-  if self.life > 10 then
+  if self.life > 30 then
     self:destroy()
   end
 end

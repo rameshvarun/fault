@@ -16,6 +16,8 @@ function Dead:enteredState()
     Timer.after(3, function() love.event.quit(0) end)
   end
 
+  love.mouse.setVisible(true)
+  love.mouse.setGrabbed(false)
   self:showButtons()
 end
 
