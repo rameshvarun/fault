@@ -15,7 +15,7 @@ GAME_ID = "fault"
 LOVE_VERSION = "11.3"
 
 LOVE_WIN64 = f"https://github.com/love2d/love/releases/download/{LOVE_VERSION}/love-{LOVE_VERSION}-win64.zip"
-LOVE_OSX = f"https://github.com/love2d/love/releases/download/{LOVE_VERSION}/love-{LOVE_VERSION}-macos.zip"
+LOVE_MAC = f"https://github.com/love2d/love/releases/download/{LOVE_VERSION}/love-{LOVE_VERSION}-macos.zip"
 LOVE_LINUX = f"https://github.com/love2d/love/releases/download/{LOVE_VERSION}/love-{LOVE_VERSION}-x86_64.AppImage"
 
 APP_IMAGE_TOOL = "https://github.com/AppImage/AppImageKit/releases/download/10/appimagetool-x86_64.AppImage"
@@ -65,10 +65,10 @@ def build_linux():
 
 	shutil.move(os.path.join(TMP_DIR, game_appimage), os.path.join(RELEASE_DIR))
 
-def build_osx():
-	print("-- Building for OSX 64-bit --")
+def build_mac():
+	print("-- Building for Mac 64-bit --")
 	love_zip = os.path.join(TMP_DIR, "love.zip")
-	urlretrieve(LOVE_OSX, love_zip)
+	urlretrieve(LOVE_MAC, love_zip)
 
 	try:
 		subprocess.check_output(['unzip', '-q', love_zip, '-d', TMP_DIR], stderr=subprocess.STDOUT)
@@ -82,7 +82,7 @@ def build_osx():
 	shutil.copyfile(LOVE_FILE, os.path.join(app_folder, "Contents", "Resources", GAME_ID + ".love"))
 	shutil.copyfile(os.path.join("media", "Info.plist"), os.path.join(app_folder, "Contents", "Info.plist"))
 
-	game_archive = GAME_ID + "-macos"
+	game_archive = GAME_ID + "-mac"
 	shutil.move(TMP_DIR, os.path.join(RELEASE_DIR, game_archive))
 	shutil.make_archive(os.path.join(RELEASE_DIR, game_archive), "zip", root_dir=os.path.join(RELEASE_DIR, game_archive))
 
@@ -134,8 +134,8 @@ if __name__ == "__main__":
 
 	if sys.argv[1] == "win":
 		build_windows()
-	elif sys.argv[1] == "osx":
-		build_osx()
+	elif sys.argv[1] == "mac":
+		build_mac()
 	elif sys.argv[1] == "linux":
 		build_linux()
 	elif sys.argv[1] == "all":
