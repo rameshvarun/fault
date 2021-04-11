@@ -18,6 +18,10 @@ case $1 in
     butler push release/fault.love varunramesh/fault:love --userversion $VERSION
     ;;
 
+  android)
+    butler push release/fault.apk varunramesh/fault:android --userversion $VERSION
+    ;;
+
   *)
     echo "Unknown platform."
     ;;
