@@ -16,11 +16,11 @@ function ModeMenu:initialize()
 end
 
 function ModeMenu:resize(w, h)
-  local scale = love.graphics.getHeight() / 100
+  local scale = math.max(love.graphics.getHeight() / 100, 1)
   self.scale = scale
   local VMARGIN, HMARGIN = 3, 5
 
-  self.button_font = love.graphics.newFont("assets/roboto.ttf", 5*scale)
+  self.button_font = love.graphics.newFont("assets/roboto.ttf", 5 * scale)
   self.button_font:setFilter('nearest', 'nearest', 0)
 
   for i, button in ipairs(self.buttons) do

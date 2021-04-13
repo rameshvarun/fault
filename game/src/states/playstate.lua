@@ -106,7 +106,7 @@ function PlayState:calculateScale()
   local vmargin = 100
   local vscale = love.graphics.getHeight() / (PlayArea.SIZE + 2 * vmargin)
 
-  self.scale = math.min(hscale, vscale)
+  self.scale = math.max(math.min(hscale, vscale), 1)
   self.cam:zoomTo(self.scale)
 
   self.time_font = love.graphics.newFont("assets/roboto.ttf", 20*self.scale)
