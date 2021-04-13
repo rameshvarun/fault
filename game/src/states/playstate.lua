@@ -3,7 +3,7 @@ PlayState:include(Stateful)
 PlayState.static.NEWRECORD_SOUND = love.audio.newSource( 'assets/sound/newrecord.wav', 'static' )
 PlayState.static.NEWRECORD_SOUND:setVolume(0.2)
 
-PlayState.static.MUSIC = love.audio.newSource('assets/sound/music.mp3', 'stream')
+PlayState.static.MUSIC = love.audio.newSource('assets/sound/music.mp3', 'static')
 PlayState.MUSIC:setLooping(true)
 PlayState.MUSIC:setVolume(0.3)
 PlayState.static.MUSIC_STARTS = {0, 52.18}

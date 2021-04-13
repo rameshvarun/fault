@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-rm -rf build/web
-love-js build/game.love -c build/web -t Fault
+rm -rf release/web
+love-js release/fault.love -c release/web -t Fault
+cp platform/web/index.html release/web/

@@ -6,34 +6,73 @@
     <title>Fault</title>
 
     <!-- Load custom style sheet -->
-    <link rel="stylesheet" type="text/css" href="theme/love.css">
+    <style>
+      * {
+          box-sizing: border-box;
+      }
+
+      h1 {
+          font-family: arial;
+          color: white;
+      }
+
+      body {
+          font-family: arial;
+          margin: 0;
+          padding: none;
+          background-color: black;
+          color: white;
+      }
+
+      footer {
+          font-family: arial;
+          font-size: 12px;
+          padding-left: 10px;
+          position:absolute;
+          bottom: 0;
+          width: 100%;
+      }
+
+      /* Links */
+      a {
+          text-decoration: none;
+      }
+      a:link {
+          color: rgb( 233, 73, 154 );
+      }
+      a:visited {
+          color: rgb( 110, 30, 71 );
+      }
+      a:hover {
+          color: rgb( 252, 207, 230 );
+      }
+
+      /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
+      #canvas {
+          padding-right: 0;
+          display: none;
+          border: 0px none;
+      }
+    </style>
   </head>
   <body>
     <canvas id="canvas" style="position: absolute; left: 0px; right: 0px; width: 100%; height: 100%;" oncontextmenu="event.preventDefault()"></canvas>
-    <center>
-      <div>
-        <canvas id="loadingCanvas" oncontextmenu="event.preventDefault()" width="800" height="600"></canvas>
-      </div>
-    </center>
+    <canvas id="loadingCanvas" style="position: absolute; left: 0px; right: 0px; width: 100%; height: 100%;" oncontextmenu="event.preventDefault()"></canvas>
 
     <script type='text/javascript'>
-      function goFullScreen(){
-        document.documentElement.requestFullscreen();
-      }
       var loadingContext = document.getElementById('loadingCanvas').getContext('2d');
       function drawLoadingText(text) {
         var canvas = loadingContext.canvas;
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-        loadingContext.fillStyle = "rgb(142, 195, 227)";
+        loadingContext.fillStyle = "rgb(0, 0, 0)";
         loadingContext.fillRect(0, 0, canvas.scrollWidth, canvas.scrollHeight);
 
         loadingContext.font = '2em arial';
         loadingContext.textAlign = 'center'
-        loadingContext.fillStyle = "rgb( 11, 86, 117 )";
+        loadingContext.fillStyle = "rgb(255, 255, 255)";
         loadingContext.fillText(text, canvas.scrollWidth / 2, canvas.scrollHeight / 2);
-
-        loadingContext.fillText("Powered By Emscripten.", canvas.scrollWidth / 2, canvas.scrollHeight / 4);
-        loadingContext.fillText("Powered By LÖVE.", canvas.scrollWidth / 2, canvas.scrollHeight / 4 * 3);
       }
 
       window.onload = function () { window.focus(); };
@@ -89,17 +128,8 @@
         Love(Module);
       }
 
-      window.addEventListener('resize', () => {
-        console.log(window.innerHeight, window.innerWidth);
-        // canvas.style.width = window.innerWidth + "px";
-        // canvas.style.height = window.innerHeight + "px";
-        // Module.setCanvasSize(document.documentElement.clientWidth / window.devicePixelRatio, document.documentElement.clientHeight  / window.devicePixelRatio);
-      });
     </script>
     <script type="text/javascript" src="game.js"></script>
     <script async type="text/javascript" src="love.js" onload="applicationLoad(this)"></script>
-    <footer>
-      <button onclick="goFullScreen();">Go Fullscreen</button>
-    </footer>
   </body>
 </html>
